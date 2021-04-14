@@ -179,9 +179,13 @@ class Stripe {
   Future<Map<String, dynamic>> handleSetupIntent(Map action) async {
     return authenticateIntent(
       action,
-      (Uri uri) => api.retrieveSetupIntent(
-        uri.queryParameters['setup_intent_client_secret']!,
-      ),
+      (Uri uri) {
+        final setupIntent = api.retrieveSetupIntent(
+          uri.queryParameters['setup_intent_client_secret']!,
+        );
+        print('setupIntent: $setupIntent');
+        return setupIntent;
+      },
     );
   }
 
