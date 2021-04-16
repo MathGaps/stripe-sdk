@@ -51,17 +51,17 @@ class PaymentMethodStore extends ChangeNotifier {
   }
 
   /// Attach a payment method and refresh the store if there are any active listeners.
-  Future<Map> attachPaymentMethod(String paymentMethodId) {
+  Future<Map> attachPaymentMethod(String paymentMethodId) async {
     final paymentMethodFuture =
-        _customerSession.attachPaymentMethod(paymentMethodId);
+        await _customerSession.attachPaymentMethod(paymentMethodId);
     refresh();
     return paymentMethodFuture;
   }
 
   /// Detach a payment method and refresh the store if there are any active listeners.
-  Future<Map> detachPaymentMethod(String paymentMethodId) {
+  Future<Map> detachPaymentMethod(String paymentMethodId) async {
     final paymentMethodFuture =
-        _customerSession.detachPaymentMethod(paymentMethodId);
+        await _customerSession.detachPaymentMethod(paymentMethodId);
     refresh();
     return paymentMethodFuture;
   }
