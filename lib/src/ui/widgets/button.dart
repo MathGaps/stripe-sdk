@@ -92,7 +92,7 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
   }
 
   @override
-  void setState(fn) {
+  void setState(VoidCallback fn) {
     if (mounted) {
       super.setState(fn);
     }
@@ -105,10 +105,11 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
   ];
 
   static final AnimatedWidgetBuilder<MultiTweenValues<_AniProps>>
+      // ignore: prefer_function_declarations_over_variables
       loadButtonLabel = (context, child, ani) => Center(
             child: Opacity(
               opacity: ani.get(_AniProps.opacity),
-              child: Text(
+              child: const Text(
                 'Load Stuff',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
@@ -116,6 +117,7 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
           );
 
   static final AnimatedWidgetBuilder<MultiTweenValues<_AniProps>>
+      // ignore: prefer_function_declarations_over_variables
       progressIndicator = (context, child, ani) => Center(
             child: LoopAnimation<double>(
               duration: 600.milliseconds,
@@ -124,7 +126,7 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
                 angle: rotation,
                 child: Opacity(
                   opacity: ani.get(_AniProps.opacity),
-                  child: Icon(
+                  child: const Icon(
                     Icons.sync,
                     color: Colors.green,
                   ),
@@ -133,6 +135,7 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
             ),
           );
 
+  // ignore: prefer_function_declarations_over_variables
   static final AnimatedWidgetBuilder<MultiTweenValues<_AniProps>> showSuccess =
       (context, child, ani) {
     final tween = MultiTween<_AniProps>()
@@ -171,12 +174,12 @@ class _LoadStuffButtonState extends State<LoadStuffButton> {
     return BoxDecoration(
         border: Border.all(color: Colors.green, width: 2),
         color: backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withAlpha(40),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ]);
   }
 }

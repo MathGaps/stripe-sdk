@@ -40,7 +40,7 @@ class ModelUtils {
     if (year < 100 && year >= 0) {
       final currentYear = now.year.toString();
       final prefix = currentYear.substring(0, currentYear.length - 2);
-      year = int.parse('$prefix$year');
+      return int.parse('$prefix$year');
     }
     return year;
   }

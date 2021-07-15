@@ -32,6 +32,7 @@ class PaymentMethodStore extends ChangeNotifier {
   static PaymentMethodStore? _instance;
 
   /// Access the singleton instance of [PaymentMethodStore].
+  // ignore: prefer_constructors_over_static_methods
   static PaymentMethodStore get instance {
     _instance ??= PaymentMethodStore();
     return _instance!;

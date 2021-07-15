@@ -30,7 +30,7 @@ class Stripe {
   }
 
   bool _isValidScheme() {
-    var isHttpScheme =
+    final isHttpScheme =
         ['http', 'https'].contains(_returnUrlForSca.split(':')[0]);
     if (kIsWeb) {
       assert(isHttpScheme,
@@ -80,12 +80,13 @@ class Stripe {
   /// Creates a return URL that can be used to authenticate a single PaymentIntent.
   /// This should be set on the intent before attempting to authenticate it.
   String getReturnUrlForSca({String? webReturnPath}) {
+    String? _webReturnPath = webReturnPath;
     if (kIsWeb) {
-      if (webReturnPath == null || webReturnPath.isEmpty) {
-        webReturnPath = '3ds/complete'; // or app route ex: 3ds/complete
+      if (_webReturnPath == null || _webReturnPath.isEmpty) {
+        _webReturnPath = '3ds/complete'; // or app route ex: 3ds/complete
       }
-      assert(webReturnPath.isNotEmpty);
-      var webUrl = Uri.base.toString() + webReturnPath;
+      assert(_webReturnPath.isNotEmpty);
+      final webUrl = Uri.base.toString() + _webReturnPath;
       debugPrint(webUrl);
       return webUrl;
     } else {
@@ -183,7 +184,7 @@ class Stripe {
         final setupIntent = api.retrieveSetupIntent(
           uri.queryParameters['setup_intent_client_secret']!,
         );
-        print('setupIntent: $setupIntent');
+        debugPrint('setupIntent: $setupIntent');
         return setupIntent;
       },
     );

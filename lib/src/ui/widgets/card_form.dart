@@ -1,5 +1,3 @@
-
-
 import 'package:awesome_card/credit_card.dart';
 import 'package:awesome_card/style/card_background.dart';
 import 'package:flutter/foundation.dart';
@@ -63,12 +61,12 @@ class _CardFormState extends State<CardForm> {
   Widget build(BuildContext context) {
     var cardExpiry = 'MM/YY';
     if (_validationModel.expMonth != null) {
-      cardExpiry = "${_validationModel.expMonth}/${_validationModel.expYear ?? 'YY'}";
+      cardExpiry =
+          "${_validationModel.expMonth}/${_validationModel.expYear ?? 'YY'}";
     }
 
     return SingleChildScrollView(
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         _getCreditCardView(cardExpiry),
         Form(
           key: widget.formKey,
@@ -88,18 +86,23 @@ class _CardFormState extends State<CardForm> {
                     },
                     validator: (text) => _validationModel.validateNumber()
                         ? null
-                        : widget.cardNumberErrorText ?? CardNumberFormField.defaultErrorText,
-                    textStyle: widget.cardNumberTextStyle ?? CardNumberFormField.defaultTextStyle,
+                        : widget.cardNumberErrorText ??
+                            CardNumberFormField.defaultErrorText,
+                    textStyle: widget.cardNumberTextStyle ??
+                        CardNumberFormField.defaultTextStyle,
                     onSaved: (text) => widget.card.number = text,
-                    decoration: widget.cardNumberDecoration ?? CardNumberFormField.defaultDecoration,
+                    decoration: widget.cardNumberDecoration ??
+                        CardNumberFormField.defaultDecoration,
                   ),
                 ),
                 Container(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     margin: const EdgeInsets.only(top: 8),
                     child: CardExpiryFormField(
-                      initialMonth: _validationModel.expMonth ?? widget.card.expMonth,
-                      initialYear: _validationModel.expYear ?? widget.card.expYear,
+                      initialMonth:
+                          _validationModel.expMonth ?? widget.card.expMonth,
+                      initialYear:
+                          _validationModel.expYear ?? widget.card.expYear,
                       onChanged: (int? month, int? year) {
                         setState(() {
                           _validationModel.expMonth = month;
@@ -112,24 +115,32 @@ class _CardFormState extends State<CardForm> {
                       },
                       validator: (text) => _validationModel.validateDate()
                           ? null
-                          : widget.cardExpiryErrorText ?? CardExpiryFormField.defaultErrorText,
-                      textStyle: widget.cardExpiryTextStyle ?? CardExpiryFormField.defaultTextStyle,
-                      decoration: widget.cardExpiryDecoration ?? CardExpiryFormField.defaultDecoration,
+                          : widget.cardExpiryErrorText ??
+                              CardExpiryFormField.defaultErrorText,
+                      textStyle: widget.cardExpiryTextStyle ??
+                          CardExpiryFormField.defaultTextStyle,
+                      decoration: widget.cardExpiryDecoration ??
+                          CardExpiryFormField.defaultDecoration,
                     )),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   margin: const EdgeInsets.only(top: 8),
                   child: Focus(
-                    onFocusChange: (value) => setState(() => cvcHasFocus = value),
+                    onFocusChange: (value) =>
+                        setState(() => cvcHasFocus = value),
                     child: CardCvcFormField(
                       initialValue: _validationModel.cvc ?? widget.card.cvc,
-                      onChanged: (text) => setState(() => _validationModel.cvc = text),
+                      onChanged: (text) =>
+                          setState(() => _validationModel.cvc = text),
                       onSaved: (text) => widget.card.cvc = text,
                       validator: (text) => _validationModel.validateCVC()
                           ? null
-                          : widget.cardCvcErrorText ?? CardCvcFormField.defaultErrorText,
-                      textStyle: widget.cardCvcTextStyle ?? CardCvcFormField.defaultTextStyle,
-                      decoration: widget.cardCvcDecoration ?? CardCvcFormField.defaultDecoration,
+                          : widget.cardCvcErrorText ??
+                              CardCvcFormField.defaultErrorText,
+                      textStyle: widget.cardCvcTextStyle ??
+                          CardCvcFormField.defaultTextStyle,
+                      decoration: widget.cardCvcDecoration ??
+                          CardCvcFormField.defaultDecoration,
                     ),
                   ),
                 ),
@@ -139,16 +150,21 @@ class _CardFormState extends State<CardForm> {
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
-                    initialValue: _validationModel.postalCode ?? widget.card.postalCode,
-                    onChanged: (text) => setState(() => _validationModel.postalCode = text),
+                    initialValue:
+                        _validationModel.postalCode ?? widget.card.postalCode,
+                    onChanged: (text) =>
+                        setState(() => _validationModel.postalCode = text),
                     onSaved: (text) => widget.card.postalCode = text,
-                    autofillHints: [AutofillHints.postalCode],
+                    autofillHints: const [AutofillHints.postalCode],
                     validator: (text) => _validationModel.isPostalCodeValid()
                         ? null
                         : widget.postalCodeErrorText ?? 'Invalid postal code',
-                    style: widget.postalCodeTextStyle ?? TextStyle(color: Colors.black),
+                    style: widget.postalCodeTextStyle ??
+                        const TextStyle(color: Colors.black),
                     decoration: widget.postalCodeDecoration ??
-                        InputDecoration(border: OutlineInputBorder(), labelText: 'Postal code'),
+                        const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Postal code'),
                   ),
                 )
               ],
@@ -160,7 +176,9 @@ class _CardFormState extends State<CardForm> {
   }
 
   Widget _getCreditCardView(String cardExpiry) {
-    if (!widget.displayAnimatedCard) return Padding(padding: EdgeInsets.zero);
+    if (!widget.displayAnimatedCard) {
+      return const Padding(padding: EdgeInsets.zero);
+    }
 
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),

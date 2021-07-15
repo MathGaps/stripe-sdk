@@ -22,16 +22,22 @@ class StripeCard {
   ///
   /// @return {@code true} if valid, {@code false} otherwise.
   bool isPostalCodeValid() {
-    return (postalCode != null && postalCode!.isNotEmpty)
-        ? int.tryParse(postalCode!) != null
-        : false;
+    if (postalCode != null && postalCode!.isNotEmpty) {
+      return int.tryParse(postalCode!) != null;
+    } else {
+      return false;
+    }
   }
 
   /// Checks whether or not the {@link #number} field is valid.
   ///
   /// @return {@code true} if valid, {@code false} otherwise.
   bool validateNumber() {
-    return number != null ? _ccValidator.validateCCNum(number!).isValid : false;
+    if (number != null) {
+      return _ccValidator.validateCCNum(number!).isValid;
+    } else {
+      return false;
+    }
   }
 
   /// Checks whether or not the {@link #expMonth} and {@link #expYear} fields represent a valid
@@ -41,7 +47,7 @@ class StripeCard {
   bool validateDate() {
     return _ccValidator
         .validateExpDate(
-        '${expMonth.toString().padLeft(2, '0')}/${expYear.toString().padLeft(2, '0')}')
+            '${expMonth.toString().padLeft(2, '0')}/${expYear.toString().padLeft(2, '0')}')
         .isValid;
   }
 
@@ -50,7 +56,9 @@ class StripeCard {
   /// @return {@code true} if valid, {@code false} otherwise
   bool validateCVC() {
     if (cvc == null) return false;
-    return _ccValidator.validateCVV(cvc!, _ccValidator.validateCCNum(number!).ccType).isValid;
+    return _ccValidator
+        .validateCVV(cvc!, _ccValidator.validateCCNum(number!).ccType)
+        .isValid;
   }
 
   /// Returns a stripe hash that represents this card.
@@ -76,7 +84,7 @@ class StripeCard {
   static void _removeNullAndEmptyParams(Map<String, Object?> mapToEdit) {
     // Remove all null values; they cause validation errors
     final List<String> keys = mapToEdit.keys.toList(growable: false);
-    for (String key in keys) {
+    for (final key in keys) {
       final Object? value = mapToEdit[key];
       if (value == null) {
         mapToEdit.remove(key);

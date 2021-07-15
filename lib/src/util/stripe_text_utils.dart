@@ -1,9 +1,7 @@
 /// Util Array for converting bytes to a hex string.
 /// {@url http://stackoverflow.com/questions/9655181/convert-from-byte-array-to-hex-string-in-java}
 
-
-
-const String HEX_ARRAY = '0123456789ABCDEF';
+const String hexArray = '0123456789ABCDEF';
 
 ///Swap {@code null} for blank text values.
 ///
@@ -50,7 +48,7 @@ bool hasAnyPrefix(String? number, List<String> prefixes) {
     return false;
   }
 
-  for (var prefix in prefixes) {
+  for (final prefix in prefixes) {
     if (number.startsWith(prefix)) {
       return true;
     }
