@@ -15,7 +15,7 @@ dependencies:
   collection: ^1.15.0
   credit_card_validator: ^2.0.0-nullsafety.0
   flutter_slidable: ^0.6.0-nullsafety.0
-  http: ^0.13.1
+  http: ^1.0.0
   mask_text_input_formatter: ^2.0.0-nullsafety.2
   simple_animations: ^3.0.3
   supercharged: ^2.0.0
